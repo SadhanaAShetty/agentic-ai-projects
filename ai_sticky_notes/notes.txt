@@ -1,0 +1,10 @@
+MCP = Model Context Protocol: an open standard for connecting AI apps to external tools and data sources.
+Architecture: hosts (AI apps) run MCP clients that connect 1:1 to MCP servers, which expose capabilities.
+Servers expose three core primitives: tools (actions the model can call), resources (data to read), and prompts (reusable templates).
+Messages use JSON-RPC 2.0 under the hood.
+Transports: stdio for local servers; streamable HTTP for remote servers (older HTTP+SSE is being phased out).
+Why it matters: build an integration once, and any MCP-compatible client can use it, avoiding custom N x M connectors.
+Clients can offer features to servers too: sampling (server asks the model for a completion), roots, and elicitation (ask the user for input).
+Security: treat tool descriptions and results as untrusted input (prompt injection risk); require user approval for sensitive actions and use least-privilege access.
+Auth: remote servers commonly use OAuth 2.1 so users grant scoped access without sharing credentials.
+Building one: official SDKs exist for TypeScript, Python and more; test with the MCP Inspector. Spec and docs: modelcontextprotocol.io
